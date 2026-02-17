@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>mwa</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#25aff4",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101c22",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "serif": ["Instrument Serif", "serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; overflow: hidden; }
+        .serif-italic { font-family: 'Instrument Serif', serif; font-style: italic; }
+        /* Smooth fade for the overlay */
+        #message-overlay { transition: opacity 0.4s ease, visibility 0.4s; }
+        .hidden-overlay { opacity: 0; visibility: hidden; pointer-events: none; }
+        .visible-overlay { opacity: 1; visibility: visible; pointer-events: auto; }
+        /* Image loop animation */
+        @keyframes imageLoop {
+            0%, 100% { opacity: 1; }
+            49% { opacity: 1; }
+            50% { opacity: 0; }
+            99% { opacity: 0; }
+        }
+        .image-1 { animation: imageLoop 3s infinite; }
+        .image-2 { animation: imageLoop 3s infinite 1.5s; }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+
+    <audio id="bg-music" autoplay>
+        <source src="You Make It Right.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="home-screen" class="relative flex h-screen w-full flex-col overflow-hidden transition-all duration-700">
+        <div class="flex items-center justify-between px-8 pt-6 w-full h-12">
+        </div>
+
+        <div class="flex flex-1 flex-col items-center justify-center px-8">
+            <div class="relative w-full max-w-[260px] aspect-[3/4] group">
+                <div class="absolute inset-0 bg-primary/10 blur-[60px] rounded-full scale-75"></div>
+                <div class="relative w-full h-full flex items-center justify-center">
+                    <img src="images/1.png" class="image-1 absolute w-full h-full object-cover" />
+                    <img src="images/2.png" class="image-2 absolute w-full h-full object-cover" />
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center justify-end pb-16 px-8">
+            <button onclick="toggleOverlay(true)" class="flex min-w-[200px] items-center justify-center rounded-full h-14 px-8 bg-primary text-white font-bold shadow-lg shadow-primary/25 active:scale-95 transition-transform">
+                Open !
+            </button>
+        </div>
+    </div>
+
+    <div id="message-overlay" class="hidden-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/20 px-6 backdrop-blur-md">
+        
+        <div class="relative w-full max-w-sm overflow-hidden bg-white shadow-[0_20px_50px_rgba(37,175,244,0.15)] rounded-2xl border border-primary/10">
+            <div class="absolute inset-0 bg-primary/10 blur-[60px] rounded-full scale-75 pointer-events-none"></div>
+            <button onclick="toggleOverlay(false)" class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background-light/50 text-[#0d171c] backdrop-blur-sm hover:bg-background-light">
+                <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+
+            <div class="flex flex-col items-center p-8 pt-8 text-center">
+
+                <div class="mb-10 px-2">
+                    <p class="text-xs leading-relaxed text-[#0d171c] whitespace-pre-wrap">
+
+hi my babyyy! random lang, soft hours ko ata ngayon eueueuue. i just want to say na i hope hindi ka nagsisisi for showing and giving me all this attention and affection. i really really want to get to know u more. as in super duper interested me sa lahat esp about uuu, okayyy?
+
+yap all u want, i'll always listen. and if ever mabigat na 'yung nararamdaman mo or hindi mo na keri 'yung mga iniisip mo, kahit problem pa ng ibang tao 'yan bwhahahaha i hope u feel safe sharing it with me. i'm never here to judge or control u. whatever u want to do in life, i'm just here to cheer u on. gowch lang !!
+
+smile ka lang lagi, bb. pogi mo saur much pag happy kaaa. thank u for being u. i love you, my baby dandan !! MWAMWAMWA ♡(˃͈ ˂͈ )
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set audio to start at 1:11
+        const audio = document.getElementById('bg-music');
+        audio.addEventListener('loadedmetadata', function() {
+            audio.currentTime = 71; // 1:11 in seconds
+        });
+
+        function toggleOverlay(show) {
+            const overlay = document.getElementById('message-overlay');
+            const home = document.getElementById('home-screen');
+            
+            if (show) {
+                overlay.classList.remove('hidden-overlay');
+                overlay.classList.add('visible-overlay');
+                home.classList.add('blur-sm', 'grayscale-[0.3]');
+            } else {
+                overlay.classList.add('hidden-overlay');
+                overlay.classList.remove('visible-overlay');
+                home.classList.remove('blur-sm', 'grayscale-[0.3]');
+            }
+        }
+    </script>
+</body>
+</html>
